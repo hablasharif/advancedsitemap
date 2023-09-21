@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse, urljoin
+import pyperclip  # Import the pyperclip library
 
 # Define a user agent to simulate a web browser
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
@@ -55,7 +56,15 @@ def main():
             if url_list:
                 total_urls = len(url_list)
                 st.success(f"Found {total_urls} URLs in the sitemap:")
-                st.write(url_list)
+                st.text_area("URLs", "\n".join(url_list))  # Display URLs in a text area
+                
+                # Add a "Copy All" button
+                if st.button("Copy All"):
+                    # Join the URLs into a single string with line breaks
+                    urls_text = "\n".join(url_list)
+                    # Copy the URLs to the clipboard
+                    pyperclip.copy(urls_text)
+                    st.success("All URLs copied to clipboard.")
             else:
                 st.error("Failed to retrieve the sitemap or extract URLs.")
 
