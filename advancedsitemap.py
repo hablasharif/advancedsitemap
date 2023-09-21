@@ -1,4 +1,3 @@
-
 import streamlit as st
 import requests
 from bs4 import BeautifulSoup
@@ -61,4 +60,4 @@ def main():
                 st.error("Failed to retrieve the sitemap or extract URLs.")
 
 if __name__ == "__main__":
-    main()  explain this
+    main()
